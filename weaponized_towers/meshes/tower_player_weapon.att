@@ -1,0 +1,11 @@
+Attachments
+{
+	Attachment
+	{
+		name "att_weapon"
+		parent "be_turret"
+		offset "0.00 0.00 -1.06"
+	}
+
+}
+

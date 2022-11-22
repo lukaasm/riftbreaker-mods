@@ -96,13 +96,13 @@ EntityBlueprint
 
 	MeshDesc
 	{
-		mesh "meshes/buildings/defense/tower_alien_influence_lvl_1.mesh"
+		mesh "meshes/tower_player_weapon.mesh"
 		material "buildings/defense/tower_alien_influence_lvl_1"	
 	}
 
 	SkeletonDesc
 	{
-		name "meshes/buildings/defense/tower_alien_influence_lvl_1"
+		name "meshes/tower_player_weapon"
 	}
 
 	TypeDesc
@@ -121,7 +121,7 @@ EntityBlueprint
 					EquipmentSlot
 					{
 						name			"MOD_1"
-						bone			"att_energy"
+						bone			"att_weapon"
 
 						allow_types		"range_weapon"
 						subslots_count	"1"
@@ -234,8 +234,8 @@ EntityBlueprint
 		aiming_cooldown "1"
 		aiming_target_time "2"
 		aiming_idle_angle "20"
-		pitch "att_energy"
-		yaw "att_energy"
+		pitch "att_weapon"
+		yaw "att_weapon"
 		check_target_visibility "1"
 		fog_of_war_filtering "1"
 	}
@@ -334,6 +334,17 @@ EntityBlueprint
 					bone "att_muzzle"
 					random_delay "3"
 				}
+			}
+		}
+
+		EffectGroup
+		{
+			group "working"
+			enabled "0"
+			Effect
+			{
+				blueprint "effects/buildings_and_machines/gas_powerplant_lightning"
+				bone "be_turret"
 			}
 		}
 	}

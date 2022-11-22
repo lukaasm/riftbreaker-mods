@@ -61,6 +61,12 @@ end
 function tower_player_weapon:OnItemEquippedEvent( evt )
 	self.equipped_weapon = evt:GetItem()
 
+	if self.equipped_weapon ~= INVALID_ID then
+		EffectService:AttachEffects(self.entity, "working")
+	else
+		EffectService:DestroyEffectsByGroup(self.entity, "working")
+	end
+
 	-- FIX ME: there is a bug that doesn't remove weapon from player mech so we need to do that here! 
 	local player = PlayerService:GetPlayerControlledEnt(0)
 	if player == INVALID_ID then

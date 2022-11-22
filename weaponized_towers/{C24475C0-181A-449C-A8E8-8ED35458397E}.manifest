@@ -6,12 +6,13 @@ WorkspaceManifest
 		String "Buildings"
 	}
 
-	title "Weaponized Tower"
-	homepage
+	title "V2VhcG9uaXplZCBUb3dlcg=="
+	homepage "https://github.com/lukaasm/riftbreaker-mods/"
 	modio_published_file "0"
 	visibility "1"
 	game_version "EXE: 611 DATA: 239"
 	version "0.1.0"
+
 	author
 	steam_published_file "2890316252"
 	dependencies
