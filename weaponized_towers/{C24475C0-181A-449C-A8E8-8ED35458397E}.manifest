@@ -1,6 +1,6 @@
 WorkspaceManifest
 {
-	description "Q29udmVydCB5b3VyIGNyYWZ0ZWQgd2VhcG9ucyBpbnRvIHVsdGltYXRlIHRvd2VyISA="
+	description "VGhpcyB0b3dlciBhbGxvd3MgdGhlIHBsYXllciB0byBjdXN0b21pemUgdGhlIHRvd2VyJ3MgYXR0YWNrIGJ5IHVzaW5nIGRpZmZlcmVudCBjcmFmdGVkIHdlYXBvbnMgZnJvbSB0aGVpciBvd24gaW52ZW50b3J5IQ=="
 	tags
 	{
 		String "Buildings"
@@ -12,6 +12,20 @@ WorkspaceManifest
 	visibility "1"
 	game_version "EXE: 611 DATA: 239"
 	version "0.1.0"
+	localizations
+	{
+		Pair_String_Localization
+		{
+			value
+			{
+				description "6L+Z5bqn5aGU5YWB6K64546p5a626YCa6L+H5L2/55So6Ieq5bex5bqT5a2Y5Lit55qE5LiN5ZCM5Yi25L2c5q2m5Zmo5p2l5a6a5Yi25aGU55qE5pS75Ye777yB"
+				title "5q2m6KOF5aGU"
+			}
+
+			key "CHINESE_SP"
+		}
+
+	}
 
 	author
 	steam_published_file "2890316252"

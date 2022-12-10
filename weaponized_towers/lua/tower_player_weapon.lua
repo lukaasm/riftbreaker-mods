@@ -15,11 +15,18 @@ function tower_player_weapon:OnInit()
 	tower.OnInit(self)
 
 	self.equipped_weapon = INVALID_ID
+	self.equipped_weapon_item = INVALID_ID
 
+	self.missing_resources = {}
 	self.attack_controller = self:CreateStateMachine()
-	self.attack_controller:AddState("shoot", { enter = "OnShootEnter", execute = "OnShootExecute", exit = "OnShootExit",})
+	self.attack_controller:AddState("shoot", { enter = "OnShootEnter", execute = "OnShootExecute", exit = "OnShootExit"})
+
+	self.icons_controller = self:CreateStateMachine()
+	self.icons_controller:AddState("check_icons", { execute = "OnCheckIconsExecute", interval = 0.5 })
+	self.icons_controller:ChangeState("check_icons")
 
 	self:RegisterHandler( self.entity, "ItemEquippedEvent", "OnItemEquippedEvent" )
+	self:RegisterHandler( self.entity, "ItemUnequippedEvent", "OnItemUnequippedEvent" )
 end
 
 function tower_player_weapon:OnTurretEvent( evt )
@@ -58,6 +65,46 @@ local function GetSubSlotForItem( owner, slot_name, item )
     return -1
 end
 
+function tower_player_weapon:OnCheckIconsExecute()
+	if WeaponService:HasAmmoToShoot(self.equipped_weapon_item) then
+		self:ClearMissingResources()
+	end
+end
+
+function tower_player_weapon:OnResourceMissingEvent(evt)
+	local iconEntity = self.missing_resources[ evt:GetResource() ]
+	if iconEntity ~= nil then
+		return
+	end
+
+	self.missing_resources[ evt:GetResource() ] = BuildingService:AttachMissingResourceIcon( self.entity, evt:GetResource(), true)
+end
+
+function tower_player_weapon:ClearMissingResources()
+	for _,iconEntity in pairs(self.missing_resources) do
+		EntityService:RemoveEntity(iconEntity)
+	end
+
+	self.missing_resources = {}
+end
+
+function tower_player_weapon:OnItemUnequippedEvent( evt )
+	if self.equipped_weapon ~= evt:GetItem() then
+		return
+	end
+
+	if self.equipped_weapon_item == INVALID_ID then
+		return
+	end
+
+	self:ClearMissingResources()
+
+	self:UnregisterHandler( self.equipped_weapon_item, "ResourceMissingEvent", "OnResourceMissingEvent" )
+
+	self.equipped_weapon = INVALID_ID
+	self.equipped_weapon_item = INVALID_ID
+end
+
 function tower_player_weapon:OnItemEquippedEvent( evt )
 	self.equipped_weapon = evt:GetItem()
 
@@ -65,6 +112,15 @@ function tower_player_weapon:OnItemEquippedEvent( evt )
 		EffectService:AttachEffects(self.entity, "working")
 	else
 		EffectService:DestroyEffectsByGroup(self.entity, "working")
+	end
+
+	self.is_charge_weapon = false
+
+	self.equipped_weapon_item = EntityService:GetChildByName(self.equipped_weapon, evt:GetSlot())
+	if self.equipped_weapon_item ~= INVALID_ID then
+		self.is_charge_weapon = EntityService:HasComponent(self.equipped_weapon_item,"ChargeWeaponComponent")
+
+		self:RegisterHandler( self.equipped_weapon_item, "ResourceMissingEvent", "OnResourceMissingEvent" )
 	end
 
 	-- FIX ME: there is a bug that doesn't remove weapon from player mech so we need to do that here! 
@@ -76,26 +132,33 @@ function tower_player_weapon:OnItemEquippedEvent( evt )
 	for slot_name in Iter({ "LEFT_HAND", "RIGHT_HAND"}) do
 		local index = GetSubSlotForItem(player, slot_name, self.equipped_weapon)
 		if index ~= -1 then
+			self:RegisterHandler( player, "ItemUnequippedEvent", "OnPlayerItemUnequippedEvent" )
 			QueueEvent("EquipmentChangeRequest", player, slot_name, index, INVALID_ID )
-			QueueEvent("EquipItemRequest", self.entity, self.equipped_weapon, "MOD_1")
 		end
 	end
 end
 
+function tower_player_weapon:OnPlayerItemUnequippedEvent(evt)
+	self:UnregisterHandler( evt:GetEntity(), "ItemUnequippedEvent", "OnPlayerItemUnequippedEvent" )
+
+	QueueEvent("EquipItemRequest", self.entity, self.equipped_weapon, "MOD_1")
+end
+
 function tower_player_weapon:OnShootEnter()
+	--QueueEvent("ActivateEquipmentSlotRequest", self.entity, "MOD_1", "" )
 end
 
 function tower_player_weapon:OnShootExecute()
-	local item_component = reflection_helper(EntityService:GetComponent(self.equipped_weapon, "InventoryItemComponent"))
-	if item_component.continuous then
-		QueueEvent( "ActivateItemRequest", self.equipped_weapon, item_component.continuous )
+	if self.is_charge_weapon then
+		QueueEvent("ActivateOnceEquipmentSlotRequest", self.entity, "MOD_1", "" )
 	else
-		QueueEvent( "ActivateOnceItemRequest", self.equipped_weapon, item_component.continuous )
+		QueueEvent("DeactivateEquipmentSlotRequest", self.entity, "MOD_1", true )
+		QueueEvent("ActivateEquipmentSlotRequest", self.entity, "MOD_1", "" )
 	end
 end
 
 function tower_player_weapon:OnShootExit()
-	QueueEvent( "DeactivateItemRequest", self.equipped_weapon, false )
+	QueueEvent("DeactivateEquipmentSlotRequest", self.entity, "MOD_1", true )
 end
 
 return tower_player_weapon

@@ -221,7 +221,7 @@ EntityBlueprint
 
 	TurretDesc
 	{
-		target "ground_unit|air_unit"
+		target "ground_unit"
 		target_ignore "invisible"
 		speed "300"
 		aim_volume "SphericalAimVolume"
@@ -234,10 +234,11 @@ EntityBlueprint
 		aiming_cooldown "1"
 		aiming_target_time "2"
 		aiming_idle_angle "20"
-		pitch "att_weapon"
-		yaw "att_weapon"
+		pitch 	"att_weapon"
+		yaw 	"att_weapon"
 		check_target_visibility "1"
 		fog_of_war_filtering "1"
+		use_IK 					"0"
 	}
 
 	DestroyDesc
