@@ -8,10 +8,10 @@ WorkspaceManifest
 
 	title "V2VhcG9uaXplZCBUb3dlcg=="
 	homepage "https://github.com/lukaasm/riftbreaker-mods/"
-	modio_published_file "0"
-	visibility "1"
-	game_version "EXE: 611 DATA: 239"
-	version "0.1.0"
+	modio_published_file "2579954"
+	visibility "0"
+	game_version "EXE: 588 DATA: 334"
+	version "1.0.0"
 	localizations
 	{
 		Pair_String_Localization
