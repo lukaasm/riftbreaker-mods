@@ -1,0 +1,158 @@
+BiomeDef
+{
+	base_materials
+	{
+		Pair_String_Vector_String
+		{
+			key "ground/misc/biome_material_2"
+			value
+			{
+				String "ground/misc/biome_material_2"
+			}
+
+		}
+
+		Pair_String_Vector_String
+		{
+			key "ground/misc/biome_material_1"
+			value
+			{
+				String "ground/misc/biome_material_1"
+			}
+
+		}
+
+		Pair_String_Vector_String
+		{
+			key "ground/misc/biome_material_0"
+			value
+			{
+				String "ground/misc/biome_material_0"
+				String "ground/magma/cracked_ground_02"
+			}
+
+		}
+
+	}
+
+	root_template
+	{
+		children
+		{
+			EntityTemplate
+			{
+				components
+				{
+					IdComponent
+					{
+						name "skybox"
+					}
+
+					MeshDesc
+					{
+						flags "4"
+						material "pbr/skybox"
+						mesh "meshes/skybox.mesh"
+						renderable_custom_parameters
+						{
+							Params
+						}
+
+					}
+
+					TransformComponent
+					{
+						scale
+						{
+							x "30.000"
+							y "30.000"
+							z "30.000"
+						}
+
+					}
+
+				}
+
+			}
+
+			EntityTemplate
+			{
+				components
+				{
+					IdComponent
+					{
+						name "main_light"
+					}
+
+					LightDesc
+					{
+						is_shadow_caster "1"
+						light_color
+						{
+							w "12.000"
+							y "0.784"
+							z "0.376"
+						}
+
+						light_mask_texture
+					}
+
+					TransformComponent
+					{
+						orientation
+						{
+							w "0.880"
+							x "-0.116"
+							y "0.365"
+							z "-0.280"
+						}
+
+						position
+						{
+							x "-30.000"
+							y "30.000"
+							z "-30.000"
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		components
+		{
+			DirectionalWindComponent
+			{
+				position_frequency_factor "0.001"
+				power_frequency "0.200"
+				power_max "500.000"
+				power_min "100.000"
+				random_rotation_time_deviation "0.040"
+				rotation_frequency "0.100"
+				rotation_max "10.000"
+			}
+
+			SceneParamsDesc
+			TimeOfDayComponent
+			{
+				timeofday_cycle "night"
+				timeofday_presets
+				{
+					TimeOfDayPresetHolder
+					{
+						resource_name "biomes/hellspawn/scene_params/hellspawn.td"
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
+

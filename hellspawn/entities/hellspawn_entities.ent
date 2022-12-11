@@ -1,0 +1,97 @@
+EntityBlueprint
+{
+    name "hellspawn/teleport_crystal"
+
+	MeshDesc
+	{
+		material "props/special/loot_container_magma_extreme"
+		mesh "meshes/props/special/loot_containers/loot_container_magma.mesh"
+		render_group 29 // no point light cast shadow
+	}
+
+	EffectDesc
+    {
+        EffectGroup
+        {           
+            enabled "1"
+			group 	"light"
+            Effects
+            {
+                Effect
+                {
+                    blueprint "lights/point/bioanomaly_shadow_caster_red"
+					bone "att_light"	
+                }	
+            }
+        }	
+		EffectGroup
+		{
+			group "container"
+			enabled "1"	
+			
+			Effects
+			{
+				Effect
+				{
+					blueprint "effects/loot/treasure_extreme"		
+					//scale "2 2 2"	
+					bone "att_energy"	
+				}
+			}
+		}
+		EffectGroup
+		{
+			group "idle"
+			enabled "1"				
+			
+			Effects
+			{
+				Effect
+				{
+					blueprint "effects/world/bio_anomaly_idle_sound"					
+				}
+			}
+		}
+    }	
+    
+	LuaDesc
+	{
+		script "lua/hellspawn_crystal.lua"
+		
+		database
+		{
+			dissolve_time float:"10"
+		}
+	}
+
+	MinimapItemDesc
+	{
+		type	"quad"
+		color
+		{
+			x "1.0"
+			y "0.0"
+			z "0.0"
+			w "1"
+		}
+		size
+		{
+			x "5"
+			y "5"
+		}
+
+		visibility "discovered"
+	}	
+
+	InteractiveComponent 
+	{
+		slot 			"HARVESTER"
+		radius 			"6"
+		remove_entity	"0"
+	}
+
+    SoundDesc
+	{
+		name "ambient/magnetic_rock"
+	}
+}

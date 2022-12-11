@@ -1,0 +1,21 @@
+WorkspaceManifest
+{
+	description
+	tags
+	{
+		String "Other"
+		String "Tiles"
+	}
+
+	title "aGVsbHNwYXdu"
+	homepage "https://github.com/lukaasm/riftbreaker-mods/"
+	modio_published_file "0"
+	visibility "0"
+	game_version
+	version
+	localizations
+	author
+	steam_published_file "0"
+	dependencies
+}
+

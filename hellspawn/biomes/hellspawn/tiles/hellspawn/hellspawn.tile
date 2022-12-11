@@ -1,0 +1,114 @@
+TileDef
+{
+	tile_materials
+	{
+		String "ground/magma/lava_01"
+	}
+
+	is_hidden "0"
+	fixed_rotation
+	tile_regions
+	{
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "0.000"
+				y "0.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "-1.000"
+				y "-1.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "-1.000"
+				y "0.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "-1.000"
+				y "1.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "0.000"
+				y "-1.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "0.000"
+				y "1.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "1.000"
+				y "-1.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "1.000"
+				y "0.000"
+			}
+
+		}
+
+		TileRegion
+		{
+			edges "flat_0,flat_0,flat_0,flat_0"
+			offset
+			{
+				x "1.000"
+				y "1.000"
+			}
+
+		}
+
+	}
+
+}
+
