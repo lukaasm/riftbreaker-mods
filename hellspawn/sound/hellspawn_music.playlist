@@ -1,0 +1,5 @@
+playlist hellspawn_music/playlist
+{
+	add_file			"sound/samples/audiorezout_erlail.ogg"
+	gain				0.45
+}

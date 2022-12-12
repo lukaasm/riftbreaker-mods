@@ -1,5 +1,6 @@
 local state = CampaignService:GetCampaignData()
 
+    -- TODO: extend and move it to utils
 local function CreateObjective( display_name )
     local params = CampaignService:GetCampaignData()
     params:SetString("display_name", display_name)
@@ -11,6 +12,7 @@ local function CreateObjective( display_name )
 end
 
 RegisterGlobalEventHandler("PlayerCreatedEvent", function(evt)
+    -- TODO: proper mission detection
     if not MissionService:IsMainMission() then
         return
     end
@@ -29,3 +31,11 @@ RegisterGlobalEventHandler("PlayerCreatedEvent", function(evt)
     local objective = CreateObjective("Investigate crystal")
     state:SetInt("hs_objective", objective);
 end)
+
+-- TODO: proper mission detection
+if not MissionService:IsMainMission() then
+    SoundService:EnableAdaptiveMusic( false )
+    for _,type in ipairs({ "loading", "fighting", "exploration", "fear", "adventure"}) do
+        SoundService:SetPlaylistOverride("music/" .. type, "hellspawn_music/playlist")
+    end
+end
