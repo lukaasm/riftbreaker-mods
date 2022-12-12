@@ -1,0 +1,6 @@
+import * from "materials/scripts/gui.material"
+
+material hellspawn/loading_screen : gui/default
+{
+	set_texture_alias diffuse materials/textures/hellspawn_loading_screen.dds
+}

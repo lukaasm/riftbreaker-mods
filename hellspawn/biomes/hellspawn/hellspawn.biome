@@ -1,5 +1,8 @@
 BiomeDef
 {
+	loading 				"hellspawn/loading_screen"
+	loading_with_outpost 	"hellspawn/loading_screen"
+
 	base_materials
 	{
 		Pair_String_Vector_String
