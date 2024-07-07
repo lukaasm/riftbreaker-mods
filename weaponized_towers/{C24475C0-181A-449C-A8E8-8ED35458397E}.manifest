@@ -6,11 +6,12 @@ WorkspaceManifest
 		String "Buildings"
 	}
 
+	modified_game_files
 	title "V2VhcG9uaXplZCBUb3dlcg=="
 	homepage "https://github.com/lukaasm/riftbreaker-mods/"
 	modio_published_file "2579954"
 	visibility "0"
-	game_version "EXE: 588 DATA: 334"
+	game_version "EXE: 975 DATA: 570"
 	version "1.0.0"
 	localizations
 	{

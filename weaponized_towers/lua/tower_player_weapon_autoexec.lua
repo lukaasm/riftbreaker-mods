@@ -1,3 +1,3 @@
-RegisterGlobalEventHandler("PlayerCreatedEvent", function(arg)
+RegisterGlobalEventHandler("PlayerInitializedEvent", function(arg)
     BuildingService:UnlockBuilding("buildings/defense/tower_player_weapon")
 end)
