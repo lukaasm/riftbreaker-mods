@@ -19,7 +19,7 @@ function tower_player_weapon:OnInit()
 
 	self.missing_resources = {}
 	self.attack_controller = self:CreateStateMachine()
-	self.attack_controller:AddState("shoot", { enter = "OnShootEnter", execute = "OnShootExecute", exit = "OnShootExit"})
+	self.attack_controller:AddState("shoot", { enter = "OnShootEnter", execute = "OnShootExecute", exit = "OnShootExit", interval=0.1})
 
 	self.icons_controller = self:CreateStateMachine()
 	self.icons_controller:AddState("check_icons", { execute = "OnCheckIconsExecute", interval = 0.5 })
@@ -27,6 +27,8 @@ function tower_player_weapon:OnInit()
 
 	self:RegisterHandler( self.entity, "ItemEquippedEvent", "OnItemEquippedEvent" )
 	self:RegisterHandler( self.entity, "ItemUnequippedEvent", "OnItemUnequippedEvent" )
+	self:RegisterHandler( self.entity, "TurretEvent", "OnTurretEvent" )
+
 end
 
 function tower_player_weapon:OnTurretEvent( evt )
@@ -149,11 +151,13 @@ function tower_player_weapon:OnShootEnter()
 end
 
 function tower_player_weapon:OnShootExecute()
+	self.activation_id = self.activation_id or 0 + 1
+
 	if self.is_charge_weapon then
-		QueueEvent("ActivateOnceEquipmentSlotRequest", self.entity, "MOD_1", "" )
+		QueueEvent("ActivateOnceEquipmentSlotRequest", self.entity, "MOD_1", "", self.activation_id )
 	else
 		QueueEvent("DeactivateEquipmentSlotRequest", self.entity, "MOD_1", true )
-		QueueEvent("ActivateEquipmentSlotRequest", self.entity, "MOD_1", "" )
+		QueueEvent("ActivateEquipmentSlotRequest", self.entity, "MOD_1", "", self.activation_id )
 	end
 end
 
